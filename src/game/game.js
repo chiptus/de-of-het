@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
+import WordContainer from './word-container';
+
 class Game extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.word}>Tafel</Text>
+        <WordContainer />
         <View style={styles.seperator} />
         <View style={styles.deOfHetContainer}>
           <TouchableOpacity
@@ -33,9 +35,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'aqua',
-  },
-  word: {
-    fontSize: 50,
   },
   seperator: {
     marginBottom: 100,
