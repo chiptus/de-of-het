@@ -55,19 +55,13 @@ const styles = StyleSheet.create({
     padding: 8,
     fontWeight: '500',
   },
-  de: {
-
-  },
   ofContainer: {
     flex: 1,
     alignItems: 'center',
   },
   of: {
     fontSize: 30,
-  },  
-  het: {
-
-  }
+  },
 })
 
 export default Game;
