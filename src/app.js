@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 
-import Header from './header/header';
+import Header from './comps/header/header';
 import Game from './game/game';
 import Footer from './comps/footer/footer';
 
