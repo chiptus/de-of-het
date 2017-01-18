@@ -15,6 +15,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      word: null,
+      right: 0,
+    }
+
     this.handleDoHClick = this.handleDoHClick.bind(this);
   }
 
@@ -37,7 +42,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <Header />
         <Game word={this.state.word.word} onClick={this.handleDoHClick} />
-        <Footer />
+        <Footer right={this.state.right} />
       </View>
     );
   }
