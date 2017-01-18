@@ -7,6 +7,7 @@ import {
 
 import Header from './header/header';
 import Game from './game/game';
+import Footer from './footer/footer';
 
 export default class App extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <Header />
         <Game />
+        <Footer />
       </View>
     );
   }
@@ -24,8 +26,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
-  content: {
-    flex: 1,
-    backgroundColor: 'aqua'
-  }
 });
