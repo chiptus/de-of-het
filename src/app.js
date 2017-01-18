@@ -16,32 +16,42 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      word: null,
+      wordIndex: 0,
       right: 0,
     }
-
+    this.words = [];
     this.handleDoHClick = this.handleDoHClick.bind(this);
   }
 
   handleDoHClick(lid) {
-    if (this.state.word.doh === lid) {
+    if (this.words[this.state.wordIndex].doh === lid) {
+      const wordIndex = this.state.wordIndex + 1;
+      if (wordIndex === this.words.length) {
+        console.log("finished level");
+        return;
+      }
       //success
-      console.log("suc");
+      this.setState({
+        right: this.state.right + 1,
+        wordIndex,
+      })
       return;
     }
     console.log("fail");
   }
 
   componentWillMount() {
-    this.words = words;
-    this.setState({ word: this.words[0] });
+     this.words = words;
+  //   this.setState({ word: this.words[0] });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Header />
-        <Game word={this.state.word.word} onClick={this.handleDoHClick} />
+        {
+          this.words.length > 0 && <Game word={this.words[this.state.wordIndex].word} onClick={this.handleDoHClick} />
+        }
         <Footer right={this.state.right} />
       </View>
     );
