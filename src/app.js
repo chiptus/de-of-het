@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ToastAndroid,
 } from 'react-native';
 
 import Header from './comps/header/header';
@@ -27,31 +28,27 @@ export default class App extends Component {
     let wordIndex = this.state.wordIndex + 1;
     let finish = false;
     let right = this.state.right;
-    let showSuccess = false;
-    let showFail = false;
+    let toastMsg = 'Wrong :(';
     if (wordIndex === this.words.length) {
       finish = true;
       wordIndex = 0;
+      right = 0;
+      toastMsg = 'Finished Level - starting again';
     }
-
     if (this.words[this.state.wordIndex].doh === lid) {
       right += 1;
-      showSuccess = true;
+      toastMsg = `That's right! ${finish ? 'and the level is finished!' : ''}`;
     }
-    else {
-      showFail = true;
-    }
+    ToastAndroid.show(toastMsg, ToastAndroid.SHORT);
     this.setState({
-        right,
-        wordIndex,
-        showSuccess,
-        showFail,
-        finish,
-      }, () => {
-        setTimeout(() => {
-          this.setState({ showSuccess: false, showFail: false })
-        }, 500);
-      });
+      right,
+      wordIndex,
+      finish,
+    }, () => {
+      // setTimeout(() => {
+      //   this.setState({ showSuccess: false, showFail: false })
+      // }, 500);
+    });
   }
 
   componentWillMount() {
@@ -65,9 +62,6 @@ export default class App extends Component {
         <Header />
         {
           this.words.length > 0 && <Game word={this.words[this.state.wordIndex].word} onClick={this.handleDoHClick} />
-        }
-        {
-          this.state.showSuccess && <Text>Succes</Text>
         }
         {
           this.state.showFail && <Text>Fail</Text>
