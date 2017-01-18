@@ -5,13 +5,15 @@ import WordContainer from './word-container';
 
 class Game extends Component {
   render() {
+    const {word, onClick} = this.props;
     return (
       <View style={styles.container}>
-        <WordContainer />
+        <WordContainer word={word}/>
         <View style={styles.seperator} />
         <View style={styles.deOfHetContainer}>
           <TouchableOpacity
             style={styles.button}
+            onPress={() => onClick(0)}
             >
             <Text style={styles.ligtWoord}>De</Text>
           </TouchableOpacity>
@@ -20,6 +22,7 @@ class Game extends Component {
           </View>
           <TouchableOpacity
             style={styles.button}
+            onPress={() => onClick(1)}            
             >
             <Text style={styles.ligtWoord}>Het</Text>
           </TouchableOpacity>

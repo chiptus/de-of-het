@@ -9,12 +9,34 @@ import Header from './comps/header/header';
 import Game from './comps/game/game';
 import Footer from './comps/footer/footer';
 
+import words from './lib/words.json';
+
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDoHClick = this.handleDoHClick.bind(this);
+  }
+
+  handleDoHClick(lid) {
+    if (this.state.word.doh === lid) {
+      //success
+      console.log("suc");
+      return;
+    }
+    console.log("fail");
+  }
+
+  componentWillMount() {
+    this.words = words;
+    this.setState({ word: this.words[0] });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Header />
-        <Game />
+        <Game word={this.state.word.word} onClick={this.handleDoHClick} />
         <Footer />
       </View>
     );
