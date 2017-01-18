@@ -18,13 +18,9 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
   containerToolbar: {
-    //flex: 1,
-    //justifyContent: 'center',
     justifyContent: 'flex-start',
-    // https://github.com/facebook/react-native/issues/2957#event-417214498
     alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
-    //height: 56,
   },
   toolbar: {
     backgroundColor: '#e9eaed',
