@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import Header from './comps/header/header';
-import Game from './game/game';
+import Game from './comps/game/game';
 import Footer from './comps/footer/footer';
 
 export default class App extends Component {
