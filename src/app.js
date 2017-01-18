@@ -7,7 +7,7 @@ import {
 
 import Header from './header/header';
 import Game from './game/game';
-import Footer from './footer/footer';
+import Footer from './comps/footer/footer';
 
 export default class App extends Component {
   render() {
