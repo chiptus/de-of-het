@@ -24,25 +24,39 @@ export default class App extends Component {
   }
 
   handleDoHClick(lid) {
-    if (this.words[this.state.wordIndex].doh === lid) {
-      const wordIndex = this.state.wordIndex + 1;
-      if (wordIndex === this.words.length) {
-        console.log("finished level");
-        return;
-      }
-      //success
-      this.setState({
-        right: this.state.right + 1,
-        wordIndex,
-      })
-      return;
+    let wordIndex = this.state.wordIndex + 1;
+    let finish = false;
+    let right = this.state.right;
+    let showSuccess = false;
+    let showFail = false;
+    if (wordIndex === this.words.length) {
+      finish = true;
+      wordIndex = 0;
     }
-    console.log("fail");
+
+    if (this.words[this.state.wordIndex].doh === lid) {
+      right += 1;
+      showSuccess = true;
+    }
+    else {
+      showFail = true;
+    }
+    this.setState({
+        right,
+        wordIndex,
+        showSuccess,
+        showFail,
+        finish,
+      }, () => {
+        setTimeout(() => {
+          this.setState({ showSuccess: false, showFail: false })
+        }, 500);
+      });
   }
 
   componentWillMount() {
-     this.words = words;
-  //   this.setState({ word: this.words[0] });
+    this.words = words;
+    //   this.setState({ word: this.words[0] });
   }
 
   render() {
@@ -51,6 +65,12 @@ export default class App extends Component {
         <Header />
         {
           this.words.length > 0 && <Game word={this.words[this.state.wordIndex].word} onClick={this.handleDoHClick} />
+        }
+        {
+          this.state.showSuccess && <Text>Succes</Text>
+        }
+        {
+          this.state.showFail && <Text>Fail</Text>
         }
         <Footer right={this.state.right} />
       </View>
