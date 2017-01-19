@@ -9,41 +9,36 @@ import {
 import Header from './comps/header/header';
 import Game from './comps/game/game';
 import Footer from './comps/footer/footer';
+import Finish from './comps/game/finish-screen';
 
 import words from './lib/words.json';
+import buildGame from './lib/game';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      wordIndex: 0,
-      right: 0,
+      game: buildGame(words, 0),
+      rightCount: 0,
     }
-    this.words = [];
+
     this.handleDoHClick = this.handleDoHClick.bind(this);
   }
 
   handleDoHClick(lid) {
-    let wordIndex = this.state.wordIndex + 1;
-    let finish = false;
-    let right = this.state.right;
-    let toastMsg = 'Wrong :(';
-    if (wordIndex === this.words.length) {
-      finish = true;
-      wordIndex = 0;
-      right = 0;
-      toastMsg = 'Finished Level - starting again';
-    }
-    if (this.words[this.state.wordIndex].doh === lid) {
-      right += 1;
-      toastMsg = `That's right! ${finish ? 'and the level is finished!' : ''}`;
-    }
+    let rightAnswer = this.state.game.checkAnswer(this.state.word.id, lid);
+    let rightCount = this.state.rightCount + (rightAnswer ? 1 : 0);
+    let word = this.state.game.getNextWord();
+    let finish = !word;
+
+    let toastMsg = rightAnswer ? 'Right!' : 'Wrond :(';
     ToastAndroid.show(toastMsg, ToastAndroid.SHORT);
+
     this.setState({
-      right,
-      wordIndex,
-      finish,
+      rightCount,
+      word,
+      showFinish: finish,
     }, () => {
       // setTimeout(() => {
       //   this.setState({ showSuccess: false, showFail: false })
@@ -52,7 +47,7 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    this.words = words;
+    this.setState({word: this.state.game.getNextWord()})
     //   this.setState({ word: this.words[0] });
   }
 
@@ -61,12 +56,12 @@ export default class App extends Component {
       <View style={styles.container}>
         <Header />
         {
-          this.words.length > 0 && <Game word={this.words[this.state.wordIndex].word} onClick={this.handleDoHClick} />
+          this.state.word && <Game word={this.state.word.word} onClick={this.handleDoHClick} />
         }
         {
-          this.state.showFail && <Text>Fail</Text>
+          this.state.showFinish && <Finish />
         }
-        <Footer right={this.state.right} />
+        <Footer right={this.state.rightCount} />
       </View>
     );
   }
