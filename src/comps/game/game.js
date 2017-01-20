@@ -8,21 +8,20 @@ class Game extends Component {
   render() {
     const {word, onClick} = this.props;
     return (
-      <ContentContainer style={styles.container}>
+      <View style={styles.container}>
         <WordContainer word={word}/>
         <View style={styles.seperator} />
         <DeOfHetContainer onClick={onClick} />
-      </ContentContainer>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'aqua',
+    backgroundColor: 'blue',
   },
   seperator: {
     marginBottom: 100,

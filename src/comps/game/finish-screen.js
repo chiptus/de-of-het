@@ -6,9 +6,9 @@ import ContentContainer from '../layout/content-container';
 class FinishScreen extends Component {
   render () {
     return (
-      <ContentContainer>
+      <View>
         <Text>Finsihed! </Text>
-      </ContentContainer>
+      </View>
      )
    }
 }

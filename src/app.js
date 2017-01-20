@@ -10,6 +10,7 @@ import Header from './comps/header/header';
 import Game from './comps/game/game';
 import Footer from './comps/footer/footer';
 import Finish from './comps/game/finish-screen';
+import ContentContainer from './comps/layout/content-container';
 
 import words from './lib/words.json';
 import buildGame from './lib/game';
@@ -32,35 +33,32 @@ export default class App extends Component {
     let word = this.state.game.getNextWord();
     let finish = !word;
 
-    let toastMsg = rightAnswer ? 'Right!' : 'Wrond :(';
+    let toastMsg = rightAnswer ? 'Right!' : 'Wrong :(';
     ToastAndroid.show(toastMsg, ToastAndroid.SHORT);
 
     this.setState({
       rightCount,
       word,
       showFinish: finish,
-    }, () => {
-      // setTimeout(() => {
-      //   this.setState({ showSuccess: false, showFail: false })
-      // }, 500);
     });
   }
 
   componentWillMount() {
     this.setState({word: this.state.game.getNextWord()})
-    //   this.setState({ word: this.words[0] });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Header />
+        <ContentContainer>
         {
           this.state.word && <Game word={this.state.word.word} onClick={this.handleDoHClick} />
         }
         {
           this.state.showFinish && <Finish />
         }
+        </ContentContainer>
         <Footer right={this.state.rightCount} />
       </View>
     );
