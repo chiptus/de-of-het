@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ToastAndroid } from 'react-native'
 
 import DefaultLayout from '../layout/default-layout';
 import Game from  '../game/game';

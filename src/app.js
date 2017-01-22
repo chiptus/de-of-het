@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ToastAndroid,
   Navigator,
 } from 'react-native';
 
