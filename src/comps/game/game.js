@@ -9,9 +9,10 @@ class Game extends Component {
     const {word, onClick} = this.props;
     return (
       <View style={styles.container}>
-        <WordContainer word={word}/>
         <View style={styles.seperator} />
-        <DeOfHetContainer onClick={onClick} />
+        <DeOfHetContainer />
+        <View style={styles.seperator} />        
+        <WordContainer word={word} onOutside={onClick}/>
       </View>
     );
   }
@@ -19,12 +20,13 @@ class Game extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: 'lightgrey',
+    flex: 1,
   },
   seperator: {
-    marginBottom: 100,
+    marginBottom: 10,
   },
 })
 
