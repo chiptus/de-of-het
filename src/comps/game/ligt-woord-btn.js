@@ -5,14 +5,23 @@ import makePannable from '../decorators/panning-decorator';
 
 class LigtWordButton extends Component {
   render() {
-    const Comp = makePannable(<TouchableOpacity
-      style={styles.button}
-      onPress={() => this.props.onClick(this.props.index)}
-      >
-      <Text style={styles.ligtWoord}>{this.props.children}</Text>
-    </TouchableOpacity>);
+    const {
+      absoluteChangeX, absoluteChangeY
+    } = this.props;
+    const transform = [
+      { translateX: absoluteChangeX },
+      { translateY: absoluteChangeY }
+    ];
+
+    
+        
     return (
-      <Comp />
+      <TouchableOpacity
+        style={button}
+        onPress={() => this.props.onClick(this.props.index)}
+        >
+        <Text style={styles.ligtWoord}>{this.props.children}</Text>
+      </TouchableOpacity>
     );
   }
 }
