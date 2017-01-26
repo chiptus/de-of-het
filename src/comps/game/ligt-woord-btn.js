@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import makePannable from '../decorators/panning-decorator';
 
 
 class LigtWordButton extends Component {
   render() {
-    const {
-      absoluteChangeX, absoluteChangeY
-    } = this.props;
-    const transform = [
-      { translateX: absoluteChangeX },
-      { translateY: absoluteChangeY }
-    ];
-
-    
-        
     return (
       <TouchableOpacity
-        style={button}
+        style={styles.button}
         onPress={() => this.props.onClick(this.props.index)}
         >
         <Text style={styles.ligtWoord}>{this.props.children}</Text>

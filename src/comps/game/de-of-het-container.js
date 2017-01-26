@@ -10,11 +10,10 @@ class DeOfHetContainer extends Component {
     return (
       <View style={styles.deOfHetContainer}>
         <LigtWoordButton onClick={onClick} index={0}>De</LigtWoordButton>
-
         <View style={styles.ofContainer}>
           <Text style={styles.of}>of</Text>
         </View>
-        <LigtWoordButton index={1}>Het</LigtWoordButton>
+        <LigtWoordButton onClick={onClick} index={1}>Het</LigtWoordButton>
       </View>
     )
   }
