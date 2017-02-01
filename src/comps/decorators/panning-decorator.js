@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, PanResponder } from 'react-native'
 
-export default BaseComponent =>
-  class Pannable extends Component {
+const noop = () => { };
+
+export default BaseComponent => {
+  return class Pannable extends Component {
+    static defaultProps = {
+      onPan: noop,
+      onPanBegin: noop,
+      onPanEnd: noop,
+    };
+
+
     constructor(props) {
       super(props);
 
@@ -42,14 +51,28 @@ export default BaseComponent =>
         </View>
       )
     }
+
+    returnToDefaultLocation() {
+      this.setState({
+        absoluteChangeX: 0,
+        absoluteChangeY: 0,
+        changeX: 0,
+        changeY: 0,
+      });
+      this.lastX = 0;
+      this.lastY = 0;
+    }
+
   }
+
+}
 
 function onStartShouldSetPanResponder({ nativeEvent: { touches } }, { x0, y0 }) {
   const shouldSet = touches.length === 1;
 
   if (shouldSet) {
     const {onPanBegin} = this.props;
-    onPanBegin && onPanBegin({
+    onPanBegin({
       originX: x0,
       originY: y0,
     });
@@ -73,12 +96,13 @@ function onPanResponderMove(evt, {dx, dy}) {
 
   this.setState(newState);
 
-  onPan && onPan(newState);
+  onPan(newState);
 }
 
 function onPanResponderRelease() {
   const { onPanEnd } = this.props;
+  const { absoluteChangeX, absoluteChangeY } = this.state;
   this.lastX = this.state.absoluteChangeX;
   this.lastY = this.state.absoluteChangeY;
-  onPanEnd && onPanEnd();
+  onPanEnd({ absoluteChangeX, absoluteChangeY, returnToDefaultLocation: this.returnToDefaultLocation.bind(this) });
 }
