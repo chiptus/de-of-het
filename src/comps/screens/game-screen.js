@@ -32,9 +32,10 @@ class GameScreen extends Component {
     let word = this.state.game.getNextWord();
     let finish = !word;
     if (finish) {
-
+      this.props.onFinish(rightCount);
+      return;
     }
-    
+
     let toastMsg = rightAnswer ? 'Right!' : 'Wrong :(';
     ToastAndroid.show(toastMsg, ToastAndroid.SHORT);
 
