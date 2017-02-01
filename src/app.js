@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 
-import Finish from './comps/game/finish-screen';
 import GameScreen from './comps/screens/game-screen';
 import FinishScreen from './comps/screens/finish-screen';
 
