@@ -16,28 +16,21 @@ import buildGame from './lib/game';
 export default class App extends Component {
 
   renderScene(route, navigator) {
-    const newGame = () => navigator.push({ index: 0 });
-    if (!route.passProps) {
-      route.passProps = {
-        rightCount: 0
-      }
-    }
+    const newGame = () => navigator.replace({ index: 0 });
     switch (route.index) {
       case 0:
-        // return (
-        //   <GameScreen
-        //     onNewGame={newGame}
-        //     onFinish={(rightCount) => navigator.push({
-        //       index: 1,
-        //       passProps: {
-        //         rightCount
-        //       }
-        //     })}
-        //     />
-        // );
+        return (
+          <GameScreen
+            onNewGame={newGame}
+            onFinish={(rightCount) => navigator.replace({
+              index: 1,
+              rightCount
+            })}
+            />
+        );
       case 1:
         return (
-          <FinishScreen onRestart={newGame} rightCount={route.passProps.rightCount} />
+          <FinishScreen onRestart={newGame} rightCount={route.rightCount} />
         )
     }
   }
