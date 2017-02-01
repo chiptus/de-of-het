@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ToastAndroid } from 'react-native'
 
 import DefaultLayout from '../layout/default-layout';
-import Game from  '../game/game';
+import Game from '../game/game';
 
 import buildGame from '../../lib/game';
 import words from '../../lib/words.json';
@@ -31,7 +31,10 @@ class GameScreen extends Component {
     let rightCount = this.state.rightCount + (rightAnswer ? 1 : 0);
     let word = this.state.game.getNextWord();
     let finish = !word;
+    if (finish) {
 
+    }
+    
     let toastMsg = rightAnswer ? 'Right!' : 'Wrong :(';
     ToastAndroid.show(toastMsg, ToastAndroid.SHORT);
 
@@ -45,7 +48,7 @@ class GameScreen extends Component {
   render() {
     return (
       <DefaultLayout>
-        <Game word={this.state.word.word} onClick={this.handleDoHClick} />
+        {!!this.state.word && <Game word={this.state.word.word} onClick={this.handleDoHClick} />}
       </DefaultLayout>
     )
   }
