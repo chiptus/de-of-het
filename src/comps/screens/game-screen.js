@@ -10,7 +10,6 @@ import words from '../../lib/words.json';
 
 class GameScreen extends Component {
   constructor(props) {
-    console.log("game", words);
     super(props);
 
     this.state = {
