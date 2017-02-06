@@ -5,6 +5,12 @@ import ContentContainer from '../layout/content-container';
 import WordContainer from './word-container';
 import DeOfHetContainer from './de-of-het-container';
 class Game extends Component {
+  
+  static PropTypes = {
+    word: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
 
@@ -12,13 +18,13 @@ class Game extends Component {
   }
 
   render() {
-    const {word, onClick} = this.props;
+    const {word = '', onClick} = this.props;
     return (
       <View style={styles.container} onLayout={this.onLayout}>
         <View style={styles.seperator} />
         <DeOfHetContainer />
         <View style={styles.seperator} />
-        <WordContainer word={word} onPanEnd={this.onPanEnd} />
+        {word.length && <WordContainer word={word} onPanEnd={this.onPanEnd} />}
       </View>
     );
   }
