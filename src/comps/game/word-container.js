@@ -6,20 +6,24 @@ import makePannable from '../decorators/panning-decorator';
 class WordContainer extends Component {
   render() {
     const {
-      absoluteChangeX, absoluteChangeY
+      absoluteChangeX, absoluteChangeY, word
     } = this.props;
     const transform = [
       { translateX: absoluteChangeX },
     ];
 
-
-    const {word} = this.props;
     return (
       <View style={[{ transform }, styles.container]}>
         <Text style={styles.word}>{word[0].toUpperCase() + word.substr(1)}</Text>
       </View>
     )
   }
+}
+
+WordContainer.propTypes = {
+  absoluteChangeX: React.PropTypes.number,
+  absoluteChangeY: React.PropTypes.number,
+  word: React.PropTypes.string.isRequired,
 }
 
 const styles = StyleSheet.create({
