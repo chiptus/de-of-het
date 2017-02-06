@@ -7,6 +7,9 @@ export default function buildGame(words = [], level = 0) {
   }
 
   const getNextWord = () => {
+    if (!words.length) {
+      return;
+    }
     playedWords.unshift(words.pop())
     return playedWords[0];
   }
