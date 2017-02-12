@@ -5,14 +5,18 @@ import ContentContainer from '../layout/content-container';
 import WordContainer from './word-container';
 import DeOfHetContainer from './de-of-het-container';
 class Game extends Component {
-  
+
   static PropTypes = {
-    word: React.PropTypes.string.isRequired,
+    word: React.PropTypes.string,
     onClick: React.PropTypes.func,
   };
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      height: 500,
+    };
 
     this.onPanEnd = this.onPanEnd.bind(this);
   }
@@ -24,13 +28,17 @@ class Game extends Component {
         <View style={styles.seperator} />
         <DeOfHetContainer />
         <View style={styles.seperator} />
-        {word.length && <WordContainer word={word} onPanEnd={this.onPanEnd} />}
+        <WordContainer word={word} onPanEnd={this.onPanEnd} containerHeight={this.state.height} />
       </View>
     );
   }
 
   onLayout = ({ nativeEvent: { layout: {width, height} } }) => {
     this.width = width;
+    this.height = height;
+    this.setState({
+      height,
+    })
   }
 
   getBorder() {
@@ -38,7 +46,6 @@ class Game extends Component {
   }
 
   onPanEnd = ({absoluteChangeX, returnToDefaultLocation}) => {
-    returnToDefaultLocation();
     if (absoluteChangeX > this.getBorder()) {
       this.props.onClick(1);
       return;

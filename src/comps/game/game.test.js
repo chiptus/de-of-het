@@ -9,5 +9,4 @@ it('renders correctly', () => {
   const tree = renderer.create(
     <Component />
   );
-  //expect(tree).toMatchSnapshot();
 });
